@@ -1,0 +1,47 @@
+﻿@using Aplicacion_Multas.Entity;
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
+<link href="~/css/multas.css" rel="stylesheet" />
+
+@{
+    var multas = ViewData["Multas"] as List<Multa>;
+    ViewData["Title"] = "Home Page";
+} 
+<body>
+    <div class="text-center">
+        <table id="multas" class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">FechaDeInfraccion</th>
+                    <th scope="col">Importe</th>
+                    <th scope="col">FechaDePagoDeInfraccion</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in multas)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.DNI</td>
+                        <td>@item.FechaDeInfraccion</td>
+                        <td>@item.Importe</td>
+                        <td id="@item.Id">@item.FechaDePagoDeInfraccion</td>
+                        <td>
+
+                            <button type="button" class="btn btn-primary" onclick="displayMessage(@item.Id)">Pagar $</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+@section scripts {
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
+    <script src="~/js/multasJs.js"></script>
+}
